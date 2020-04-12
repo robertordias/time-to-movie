@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, NavController, Nav } from 'ionic-angular';
+import { Platform, MenuController, NavController, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -46,7 +46,7 @@ export class MyApp {
     
   // }
 
-  constructor(platform: Platform, private menu: MenuController, statusBar: StatusBar, private feedback: FeedBackService, splashScreen: SplashScreen, public storage: Storage, private userService: UserService) {
+  constructor(platform: Platform, private menu: MenuController, private events: Events, statusBar: StatusBar, private feedback: FeedBackService, splashScreen: SplashScreen, public storage: Storage, private userService: UserService) {
     this.initializeApp();
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -54,24 +54,36 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    this.events.subscribe('user', (user) => {
+      this.storage.set('user', user);
+      this.user = user;
+    })
+
   }
 
   async initializeApp()
   {
-    this.feedback.presentLoading();
-    let userSaved = await this.storage.get('user');
-    if(userSaved)
-    {
-      this.user = await this.userService.findByEmail(userSaved.email);
-      if(this.user)
+    try{
+      this.feedback.presentLoading();
+      let userSaved = await this.storage.get('user');
+      if(userSaved)
       {
-        this.feedback.dismissLoading();
-        this.rootPage = HomePage;
-        return;
+        this.user = await this.userService.findByEmail(userSaved.email);
+        if(this.user)
+        {
+          this.feedback.dismissLoading();
+          this.rootPage = HomePage;
+          return;
+        }
       }
+      this.feedback.dismissLoading();
+      this.rootPage = LoginPage;
+    }catch(e)
+    { 
+      this.feedback.dismissLoading();
+      this.rootPage = LoginPage;
     }
-    this.feedback.dismissLoading();
-    this.rootPage = LoginPage;
   }
 
   openPage(p)

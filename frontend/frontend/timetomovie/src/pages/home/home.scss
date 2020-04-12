@@ -1,3 +1,35 @@
 page-home {
 
+    .toolbar,
+    .toolbar-background,
+    .toolbar-content
+    {
+        background: #1b282d;
+    }
+
+    .back-button,
+    .toolbar-title
+    {
+        color: #fff;
+    }
+
+    ion-header
+    {
+        background: #1b282d;
+        ion-title
+        {
+            color: #fff;
+        }
+    }
+
+    .scroll-content
+    {
+        background-size: cover;
+        background-position: right center;
+        
+        background: #1b282d;
+        background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
+    }
+    
+
 }

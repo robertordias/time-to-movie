@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FeedBackService } from '../../services/feedback-service';
 import { HomePage } from '../home/home';
@@ -61,7 +61,7 @@ export class SignUpPage {
     dom: { start: '', end: '', indisponivel: undefined }
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService, private storage: Storage, private app: App, private feedback: FeedBackService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, private userService: UserService, private storage: Storage, private app: App, private feedback: FeedBackService) {
     this.user = new User();
   }
 
@@ -126,12 +126,14 @@ export class SignUpPage {
 
   async save() {
 
-    console.log(this.user)
+    this.feedback.presentLoading();
     if (!this.name) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Nome" deve ser preenchido');
       return;
     }
     if (!this.email) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Email" deve ser preenchido');
       return;
     }
@@ -141,17 +143,20 @@ export class SignUpPage {
     let user = await this.userService.findByEmail(this.email);
     if(user)
     {
+      this.feedback.dismissLoading();
       this.feedback.alert('Erro', 'Email já cadastrado');
       return;
     }
     this.user.email = this.email;
 
     if (!this.password) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Senha" deve ser preenchido');
       return;
     }
 
     if (this.password != this.passwordConfirm) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Erro', 'Senha não condiz com a confirmação de senha.');
       return;
     }
@@ -159,6 +164,7 @@ export class SignUpPage {
     this.user.password = this.password;
 
     if (!this.state) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Selecione o campo "Estado"');
       return;
     }
@@ -167,19 +173,22 @@ export class SignUpPage {
 
     let week = this.formatDays();
     if (!week) {
+      this.feedback.dismissLoading();
       return;
     }
     this.user.week = week;
 
-    console.log(this.user);
     let res = await this.userService.create(this.user);
     if(!res.success)
     {
+      this.feedback.dismissLoading();
       this.feedback.alert('Erro', res.message);
       return;
     }
     this.storage.set('user', this.user);
     var nav = this.app.getRootNav();
+    this.feedback.dismissLoading();
+    this.events.publish('user', this.user);
     nav.setRoot(HomePage);
   }
 

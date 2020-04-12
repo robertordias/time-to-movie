@@ -32,7 +32,7 @@ public class IngressoComService
 
 	public String getPartnership()
 	{
-		return this.partnership;
+		return "partnership/" + this.partnership;
 	}
 
 	public String getPath()
@@ -58,7 +58,27 @@ public class IngressoComService
 	
 	public void findCityFromIngressoCom(String uf, final HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
 	{
-		JsonNode res = this.requestIngressoCom("states/" + uf);
+		String path = String.format("states/%s", uf);
+		JsonNode res = this.requestIngressoCom(path);
+		final ServletOutputStream out = response.getOutputStream();
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue( out, res );
+	}
+	
+	
+	public void findTheatersFromCity(String cityId, final HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
+	{
+		String path = String.format("theaters/city/%s/%s", cityId, getPartnership());
+		JsonNode res = this.requestIngressoCom(path);
+		final ServletOutputStream out = response.getOutputStream();
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue( out, res );
+	}
+	
+	public void sessionsFromTheather(String cityId, String theaterId, final HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
+	{
+		String path = String.format("sessions/city/%s/theater/%s/%s",cityId, theaterId, getPartnership());
+		JsonNode res = this.requestIngressoCom(path);
 		final ServletOutputStream out = response.getOutputStream();
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue( out, res );

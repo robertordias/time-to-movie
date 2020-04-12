@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FeedBackService } from '../../services/feedback-service';
 import { User } from '../../app/models/User';
@@ -70,7 +70,7 @@ export class PerfilPage {
   };
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService, private storage: Storage, private feedback: FeedBackService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, private userService: UserService, private storage: Storage, private feedback: FeedBackService) {
   }
 
   async ionViewWillEnter()
@@ -173,11 +173,14 @@ export class PerfilPage {
 
   async save()
   {
+    this.feedback.presentLoading();
     if (!this.name) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Nome" deve ser preenchido');
       return;
     }
     if (!this.email) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Email" deve ser preenchido');
       return;
     }
@@ -186,11 +189,13 @@ export class PerfilPage {
     this.user.email = this.email;
 
     if (!this.password) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Campo "Senha" deve ser preenchido');
       return;
     }
 
     if (this.password != this.passwordConfirm) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Erro', 'Senha não condiz com a confirmação de senha.');
       return;
     }
@@ -198,6 +203,7 @@ export class PerfilPage {
     this.user.password = this.password;
 
     if (!this.state) {
+      this.feedback.dismissLoading();
       this.feedback.alert('Campo Obrigatório', 'Selecione o campo "Estado"');
       return;
     }
@@ -205,6 +211,7 @@ export class PerfilPage {
     this.user.local =  new Local(this.states.find( state => state.uf == this.state )); 
     let week = this.formatDays();
     if (!week) {
+      this.feedback.dismissLoading();
       return;
     }
     this.user.week = week;
@@ -212,11 +219,13 @@ export class PerfilPage {
     let res = await this.userService.create(this.user);
     if(!res.success)
     {
+      this.feedback.dismissLoading();
       this.feedback.alert('Erro', 'Verifique sua conexão');
       return;
     }
     this.storage.set('user', this.user);
-
+    this.events.publish('user', this.user);
+    this.feedback.dismissLoading();
     this.navCtrl.pop();
   }
 

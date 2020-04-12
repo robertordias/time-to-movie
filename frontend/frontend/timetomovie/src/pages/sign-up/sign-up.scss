@@ -4,7 +4,7 @@ page-sign-up {
     .toolbar-background,
     .toolbar-content
     {
-        background: #0b6b90;
+        background: #1b282d;
     }
 
     .back-button,
@@ -15,7 +15,7 @@ page-sign-up {
 
     ion-header
     {
-        background: #0b6b90;
+        background: #1b282d;
         ion-title
         {
             color: #fff;
@@ -139,10 +139,11 @@ page-sign-up {
     }
     ion-footer
     {
-        background: #0b6b90;
+        background: #1b282d;
         button
         {
-           background: #0b6b90;
+            background-color: #1b282d!important;
+            background: #1b282d;
         }
     }
 

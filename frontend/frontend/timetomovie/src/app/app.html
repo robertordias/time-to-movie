@@ -12,7 +12,10 @@
             <div *ngFor="let p of pages" class="menu-option">
                 <ion-icon *ngIf="p.title == 'Perfil'" name="person-circle-outline"></ion-icon>
                 <ion-icon *ngIf="p.title == 'Sair'" name="exit-outline"></ion-icon>
-                <button menuClose ion-item (click)="openPage(p)"> {{p.title}} </button>
+                <button menuClose ion-item (click)="openPage(p)">
+                    <ion-icon *ngIf="p.title == 'Perfil'" name="person-circle-outline"></ion-icon>
+                    <ion-icon *ngIf="p.title == 'Sair'" name="exit-outline"></ion-icon>
+                    {{p.title}} </button>
             </div>
         </ion-list>
         

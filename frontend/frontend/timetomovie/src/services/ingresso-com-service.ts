@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Headers } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { Platform } from 'ionic-angular';
 import Constants from '../setting.config';
@@ -9,18 +8,16 @@ import Constants from '../setting.config';
 export class IngressoComService {
 
   baseUrl: String = 'https://api-content.ingresso.com/v0/';
-
-  
   header =  new HttpHeaders().set('Access-Control-Allow-Origin' , '*').set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
 
-  constructor(public httpClient: HttpClient, private http: Http, private httpNative: HTTP, private platform: Platform) 
+  constructor(public httpClient: HttpClient, private httpNative: HTTP, private platform: Platform) 
   {
 
   }
 
   async getCityFromIngressoCom(UF):Promise<any>
   {
-    let url =  Constants.api + 'ingresso/states/' + UF;
+    let url = Constants.api + 'ingresso/states/' + UF;
 
     let res;
     if(this.platform.is('cordova'))
@@ -38,7 +35,7 @@ export class IngressoComService {
 
   async getTheatersfromCity(cityId):Promise<any>
   {
-    let url = this.baseUrl + 'theaters/city/' + cityId + '/partnership/tccrobertorodrigues';
+    let url = Constants.api + 'ingresso/theaters/' + cityId;
 
     let res;
     if(this.platform.is('cordova'))
@@ -56,11 +53,7 @@ export class IngressoComService {
 
   async getSessionsfromTheather(cityId, theaterId):Promise<any>
   {
-    let url = this.baseUrl + "/sessions/city/" + cityId + "/theater/" + theaterId + "/partnership/tccrobertorodrigues";
-
-    let header =  new Headers({'Access-Control-Allow-Origin' : 'http://localhost',
-    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-    'Access-Control-Allow-Headers' : 'Content-Type'})
+    let url = Constants.api + 'ingresso/sessions/' + cityId + '/' + theaterId;
 
     let res;
     if(this.platform.is('cordova'))
