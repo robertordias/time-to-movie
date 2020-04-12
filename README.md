@@ -11,7 +11,7 @@ Ferramentas necessárias para buildar o projeto:
 
 # Instalação do Ionic
 
-Após a instalaçao do Node Js faça a instalação do Ionic no repositório do projeto (frontend)
+Após a instalaçao do Node Js faça a instalação do Ionic (CMD) no repositório do projeto (frontend)
 
 ```sh
 npm install
