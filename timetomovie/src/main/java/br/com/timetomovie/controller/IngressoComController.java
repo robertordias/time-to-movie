@@ -1,0 +1,34 @@
+package br.com.timetomovie.controller;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import br.com.timetomovie.services.IngressoComService;
+
+@Controller
+@RequestMapping(value = "/ingresso")
+public class IngressoComController {
+
+	@GetMapping(value = "/states/{uf}")
+	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
+	public void cityFromIngressoCom(@PathVariable(value = "uf") String uf, final HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException
+	{
+		this.ingressoComService.findCityFromIngressoCom(uf, response);
+	}
+	
+	
+	
+	@Autowired
+	private IngressoComService ingressoComService;
+}

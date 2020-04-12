@@ -1,0 +1,21 @@
+<ion-menu id="menuLoginOn" [content]="content" [swipeEnabled]="true" side="start" contentId="main" class="my-custom-menu"> 
+    <ion-content>
+        <ion-list>
+            <div class="menu-userlog">
+                <div>
+                    <label>{{user ? user.name : ''}}</label>
+                    <span>{{user ? (user.local ? user.local.estado : '') : ''}}</span>
+                </div>
+            </div>
+        </ion-list>
+        <ion-list>
+            <div *ngFor="let p of pages" class="menu-option">
+                <ion-icon *ngIf="p.title == 'Perfil'" name="person-circle-outline"></ion-icon>
+                <ion-icon *ngIf="p.title == 'Sair'" name="exit-outline"></ion-icon>
+                <button menuClose ion-item (click)="openPage(p)"> {{p.title}} </button>
+            </div>
+        </ion-list>
+        
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

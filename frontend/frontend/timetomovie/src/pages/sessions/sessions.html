@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        Sessões de {{theatherName}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <div>
+    <span *ngIf="initialDate">Sessões disponíveis para {{dayOfTheWeek}} antes de {{initialDate}} e após {{finalDate}}</span>
+    <span *ngIf="!initialDate">Todos as sessões estão disponíveis para {{dayOfTheWeek}} </span>
+  </div>
+  <div *ngFor="let movie of movies">
+      <ion-card>
+        <img src="{{movie.images[0].url}}" />
+        <ion-card-header>
+          <span>{{movie.title}}</span>
+        </ion-card-header>
+        <ion-card-content>
+          Descrição
+        </ion-card-content>
+      </ion-card>
+    </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "timetomovie",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

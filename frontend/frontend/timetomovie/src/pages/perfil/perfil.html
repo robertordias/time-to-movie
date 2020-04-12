@@ -1,0 +1,121 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-title>Meu Perfil</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <h1>Preencha os campos que deseja editar:</h1>
+    <div class="form-container">
+
+        <div class="form-days">
+          <label>Sábado: </label>
+          <input type="tel" [disabled]="week.sab.indisponivel" [(ngModel)]="week.sab.start" name="sabStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.sab.indisponivel" [(ngModel)]="week.sab.end" name="sabEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.sab.indisponivel"></ion-checkbox>
+          </label>
+          
+        </div>
+
+        <div class="form-days">
+          <label>Sexta: </label>
+          <input type="tel" [disabled]="week.sex.indisponivel" [(ngModel)]="week.sex.start" name="sexStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.sex.indisponivel" [(ngModel)]="week.sex.end" name="sexEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.sex.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div class="form-days">
+          <label>Quinta: </label>
+          <input type="tel" [disabled]="week.qui.indisponivel" [(ngModel)]="week.qui.start" name="quiStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.qui.indisponivel" [(ngModel)]="week.qui.end" name="quiEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.qui.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div class="form-days">
+          <label>Quarta: </label>
+          <input type="tel" [disabled]="week.qua.indisponivel" [(ngModel)]="week.qua.start" name="quaStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.qua.indisponivel" [(ngModel)]="week.qua.end" name="quaEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.qua.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div class="form-days">
+          <label>Terça: </label>
+          <input type="tel" [disabled]="week.ter.indisponivel" [(ngModel)]="week.ter.start" name="terStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.ter.indisponivel" [(ngModel)]="week.ter.end" name="terEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.ter.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div class="form-days">
+          <label>Segunda: </label>
+          <input type="tel" [disabled]="week.seg.indisponivel" [(ngModel)]="week.seg.start" name="segStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.seg.indisponivel" [(ngModel)]="week.seg.end" name="segEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.seg.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div class="form-days">
+          <label>Domingo: </label>
+          <input type="tel" [disabled]="week.dom.indisponivel" [(ngModel)]="week.dom.start" name="domStart" maxlength="5" (keyup)="formatHour($event)" >
+          <label> até </label>
+          <input type="tel" [disabled]="week.dom.indisponivel" [(ngModel)]="week.dom.end" name="domEnd" maxlength="5" (keyup)="formatHour($event)" >
+          <label> indisponível 
+              <ion-checkbox [(ngModel)]="week.dom.indisponivel"></ion-checkbox>
+          </label>
+        </div>
+
+        <div>
+            <label>Horários indisponíveis (Deixe em branco para dias livres):</label>
+        </div>
+
+        <div class="form-item">
+          <ion-select [(ngModel)]="state">
+            <ion-option *ngFor="let state of states" value="{{state.uf}}"> {{state.uf}} - {{state.estado}}</ion-option>
+          </ion-select>
+          <div class="title-form">
+              <label>Estado</label>
+          </div>
+        </div>
+        <div>
+            <input type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm"  >
+            <label>Confirmar Senha</label>
+        </div>
+        <div>
+            <input type="password" [(ngModel)]="password" name="password"  >
+            <label>Senha</label>
+        </div>
+        <div>
+            <input type="text" [(ngModel)]="email" name="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+            <label>Email</label>
+        </div>
+        <div>
+            <input type="text" [(ngModel)]="name" name="name">
+            <label>Nome</label>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <button ion-button full class="btn" (click) = "save()">Salvar</button>
+</ion-footer>

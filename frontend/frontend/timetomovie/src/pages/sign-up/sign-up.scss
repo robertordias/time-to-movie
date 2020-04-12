@@ -1,0 +1,149 @@
+page-sign-up {
+
+    .toolbar,
+    .toolbar-background,
+    .toolbar-content
+    {
+        background: #0b6b90;
+    }
+
+    .back-button,
+    .toolbar-title
+    {
+        color: #fff;
+    }
+
+    ion-header
+    {
+        background: #0b6b90;
+        ion-title
+        {
+            color: #fff;
+        }
+    }
+
+    .scroll-content
+    {
+        background-size: cover;
+        background-position: right center;
+        
+        background: rgb(0,125,187);
+        background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
+        h1
+        {
+            color: #fff;
+            font-size: 2.2rem;
+            text-align: center;
+            font-weight: 300;
+            border-bottom: none;
+            padding: 2em 1em;
+        }
+        .form-container
+        {
+            display: flex;
+            background: #fff;
+            flex-direction: column-reverse;
+            width: 100%;
+            padding: 25px 0 25px 0;
+            justify-content: center;
+            align-items: center;
+    
+            div 
+            {
+                width: 80%;
+                display: flex;
+                flex-direction: column-reverse;
+                margin-bottom: 1em;
+    
+                label
+                {
+                    margin: 0;
+                    font-weight: 600;
+                    color: #414140;
+                    font-size: 1.5rem;
+                    margin-bottom: 0.3em;
+                }
+                input
+                {
+                    margin: 0;
+                    padding: 1em;
+                    border: 1px solid #c5c5c4;
+                    color: #000;
+                }
+                input:focus
+                {
+                    border: 1px solid #1375ad;
+                }
+                input:focus + label
+                {
+                    color: #1375ad;
+                }
+                input[disabled]
+                {
+                    background-color: #f1f1f1;
+                    color: rgba(0,0,0,.5);
+                }
+                .datetime,
+                .select
+                {
+                    max-width: 100%;
+                    .datetime-text,
+                    .select-text
+                    {
+                        color: #000;
+                    }
+                    .select-icon
+                    {
+                        width: 20%;
+                    }
+                    .select-icon-inner
+                    {
+                        left: 100%;
+                    }
+                    button.item-cover
+                    {
+                        left: 10em;
+                        top: 39em;
+                        width: 80%;
+                        height: 15%;
+                    }
+                }
+                .datetime
+                {
+                    max-width: 20%;
+                }
+            }
+            .form-item
+            {
+                border-bottom: 0.2px solid #a9a6a6;
+            }
+            .form-days
+            {
+                display: inline;
+                border-bottom: 0.2px solid #a9a6a6;
+                padding-bottom: 10px;
+                input
+                {
+                    width: 25%;
+                }
+                ion-checkbox
+                {
+                    width: 7%;
+                    .checkbox-icon
+                    {
+                        top: 18px;
+                    }
+                }
+            }
+        }
+    }
+    ion-footer
+    {
+        background: #0b6b90;
+        button
+        {
+           background: #0b6b90;
+        }
+    }
+
+}

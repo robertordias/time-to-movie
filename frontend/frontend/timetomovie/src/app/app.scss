@@ -1,0 +1,75 @@
+ng-component{
+
+
+    .logo
+    {
+        max-width: 50%;
+        padding-bottom: 10%;
+    }
+    .scroll-content
+    {
+        color: white;
+        overflow: auto;
+
+        .login-form
+        {
+            text-align: center;
+            width: 80%;
+
+            div
+            {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 1em;
+                display: flex;
+                flex-direction: column-reverse;
+
+                label
+                {
+                    margin: 0 0 0.3em 0;
+                    font-weight: 600;
+                    text-align: left;
+                }
+                input
+                {
+                    font-size: 1.5rem;
+                    text-align: left;
+                    margin: 0;
+                    background-color: transparent;
+                    color: #fff;
+                    width: 100%;
+                    border: 1px solid #fff;
+                    padding: 0.8em 0.5em;
+                }
+            }
+        }
+        .button-area
+        {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            button
+            {
+                background-color: transparent;
+                text-align: center;
+                padding: 0.5em;
+                font-size: 2rem;
+                color: #fff;
+                font-weight: 600;
+                width: 50%;
+                border: 1px solid #fff;
+                margin-top: 1em;
+            }
+        }
+    }
+    .login-body .scroll-content
+    {
+        background: rgb(0,125,187);
+        background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
