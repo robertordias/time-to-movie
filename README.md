@@ -14,7 +14,14 @@ Ferramentas necessárias para buildar o projeto:
 Após a instalaçao do Node Js faça a instalação do Ionic no repositório do projeto (frontend)
 
 ```sh
+npm install
 npm install -g ionic@3.19.0 cordova --save
+```
+
+Rode o projeto a partir do comando
+
+```sh
+ionic serve
 ```
 
 # Configuração do Java - Backend
