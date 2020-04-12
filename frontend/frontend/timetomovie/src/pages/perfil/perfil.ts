@@ -223,7 +223,7 @@ export class PerfilPage {
       this.feedback.alert('Erro', 'Verifique sua conexão');
       return;
     }
-    this.storage.set('user', this.user);
+    this.storage.set('user',this.user);
     this.events.publish('user', this.user);
     this.feedback.dismissLoading();
     this.navCtrl.pop();

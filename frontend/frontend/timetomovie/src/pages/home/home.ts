@@ -3,6 +3,7 @@ import { IngressoComService } from '../../services/ingresso-com-service';
 import { Storage } from '@ionic/storage';
 import { NavController, AlertController } from 'ionic-angular';
 import { TheathersListPage } from '../theathers-list/theathers-list';
+import { User } from '../../app/models/User';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,8 @@ export class HomePage {
 
   async ionViewWillEnter()
   {
-    this.user = await this.storage.get('user');
+    let user = await this.storage.get('user');
+    this.user = new User(user);
 
     let data = await this.ingressoService.getCityFromIngressoCom(this.user.local.uf);
 
