@@ -52,7 +52,7 @@ public class IngressoComService
 		final ResponseEntity<String> forwardResponse = rest
 			.exchange( completeUrl, HttpMethod.GET, entity, String.class );
 		final String responseString = forwardResponse.getBody();
-		return new ObjectMapper().readValue( responseString, JsonNode.class );
+		return responseString != null ? new ObjectMapper().readValue( responseString, JsonNode.class ) : null;
 
 	}
 	
@@ -79,9 +79,16 @@ public class IngressoComService
 	{
 		String path = String.format("sessions/city/%s/theater/%s/%s",cityId, theaterId, getPartnership());
 		JsonNode res = this.requestIngressoCom(path);
-		final ServletOutputStream out = response.getOutputStream();
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue( out, res );
+		final ServletOutputStream out = response.getOutputStream();
+		if(res != null)
+		{			
+			mapper.writeValue( out, res );
+		}
+
+		final ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
+		objectNode.put("data" , "" );
+		mapper.writeValue( out, objectNode);
 	}
 
 	@Value( "${ingresso.com.api}" )

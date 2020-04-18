@@ -33,7 +33,7 @@ export class TheathersListPage {
   async getSessions(theatherId, theatherName)
   {
     let sessions = await this.ingressoService.getSessionsfromTheather(this.cityId, theatherId);
-    if(!sessions)
+    if(!sessions || !sessions.data)
     {
       this.feedback.alert('Atenção', 'Não há sessões disponíveis para esse cinema');
       return;
@@ -55,11 +55,11 @@ export class TheathersListPage {
       this.feedback.alert('Atenção', 'Não há cinemas disponíveis para essa cidade');
       this.navCtrl.pop();
     }
-    if(!hasCinema)
-    {
-      this.feedback.alert('Atenção', this.cinemas[0].blockMessage);
-      this.navCtrl.pop();
-    }
+    // if(!hasCinema)
+    // {
+    //   this.feedback.alert('Atenção', this.cinemas[0].blockMessage);
+    //   this.navCtrl.pop();
+    // }
   }
 
 }

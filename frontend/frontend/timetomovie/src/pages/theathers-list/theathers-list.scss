@@ -16,6 +16,10 @@ page-theathers-list {
                     display: flex;
                     flex-direction: column;
                     padding-left: 45%;
+                    span
+                    {
+                        white-space: normal;
+                    }
                 }
             }
         }

@@ -11,17 +11,11 @@
 
 <ion-content padding>
   <div *ngFor="let cine of cinemas">
-    <ion-item *ngIf="cine.enabled" (click)="getSessions(cine.id, cine.name)">
-      <div *ngIf="cine.enabled">
-        <img alt="imagem-cinema" src="{{cine.images[0].url}}" >
+    <ion-item  (click)="getSessions(cine.id, cine.name)">
+      <div >
+        <img alt="imagem-cinema" src="{{cine.images[0].url}}" onerror="this.src='/assets/imgs/image-error.png'" >
         <div class="information">
           <span>{{cine.name}}</span>
-          <div *ngIf="cine.telephones.length > 0">
-            <span>Contatos:</span>
-            <div *ngFor="let tel of cine.telephones">
-              <span>{{tel}}</span>
-            </div>
-          </div>
         </div>
       </div>
     </ion-item>
