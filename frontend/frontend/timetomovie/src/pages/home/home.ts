@@ -33,6 +33,7 @@ export class HomePage {
 
   async ionViewWillEnter()
   {
+    this.city = await this.storage.get('city');
     let user = await this.storage.get('user');
     this.user = new User(user);
 
@@ -75,13 +76,14 @@ export class HomePage {
     }
 
     let film = await this.ingressoService.getTheatersfromCity(this.city);
+    this.storage.set('city', this.city);
     this.navCtrl.push(TheathersListPage,
       {
         user: this.user,
         cityId : this.city,
         cinemas: film,
         dayOfTheWeek: this.day,
-        dayUser: dayUser,
+        dayUser: this.user[day].hour,
         isToday: this.isToday
       });
   }

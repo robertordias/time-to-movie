@@ -8,26 +8,30 @@
 </ion-header>
 
 <ion-content padding>
+    <div class="logo">
+      <img class="logo-home" src="/assets/imgs/logo-login.png">
+    </div>
+    <div>
+      <ion-item>
+        <ion-label>Selecione a Cidade:</ion-label>
+        <ion-select [(ngModel)]="city">
+          <ion-option  *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Quero para hoje</ion-label>
+        <ion-checkbox [(ngModel)]="isToday"></ion-checkbox>
+      </ion-item>
+      <ion-item >
+        <ion-label> Selecione o dia da Semana:</ion-label>
+        <ion-select [disabled]="isToday" [(ngModel)]="day">
+          <ion-option *ngFor="let day of daysOfTheWeek" value="{{day.code}}">{{day.name}}</ion-option>
+        </ion-select>
+      </ion-item>
     
-  <ion-item>
-    <ion-label>Selecione a Cidade:</ion-label>
-    <ion-select [(ngModel)]="city">
-      <ion-option  *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Quero para hoje</ion-label>
-    <ion-checkbox [(ngModel)]="isToday"></ion-checkbox>
-  </ion-item>
-  <ion-item >
-    <ion-label> Selecione o dia da Semana:</ion-label>
-    <ion-select [disabled]="isToday" [(ngModel)]="day">
-      <ion-option *ngFor="let day of daysOfTheWeek" value="{{day.code}}">{{day.name}}</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <button [disabled]='!validateFields()' ion-button (click)="nextPage()">Buscar Cinemas</button>
-  </ion-item>
+      <ion-item>
+        <button [disabled]='!validateFields()' ion-button (click)="nextPage()">Buscar Cinemas</button>
+      </ion-item>
+    </div>
 
 </ion-content>

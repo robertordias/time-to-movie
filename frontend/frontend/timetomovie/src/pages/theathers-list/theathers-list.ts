@@ -33,11 +33,11 @@ export class TheathersListPage {
   async getSessions(theatherId, theatherName)
   {
     let sessions = await this.ingressoService.getSessionsfromTheather(this.cityId, theatherId);
-    if(!sessions || !sessions.data)
-    {
-      this.feedback.alert('Atenção', 'Não há sessões disponíveis para esse cinema');
-      return;
-    }
+    // if(!sessions || !sessions.data)
+    // {
+    //   this.feedback.alert('Atenção', 'Não há sessões disponíveis para esse cinema');
+    //   return;
+    // }
     
     this.navCtrl.push(SessionsPage,{
       sessions : sessions,

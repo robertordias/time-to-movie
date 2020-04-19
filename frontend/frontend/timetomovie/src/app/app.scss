@@ -1,4 +1,20 @@
-ng-component{
+*{
+    ion-modal
+    {
+        .modal-wrapper
+        {
+            background: rgba(0, 0, 0, 0.7)!important;
+        }
+
+        .ion-page
+        {
+            height: 42%;
+            width: 90%;
+            margin: 5%;
+            margin-top: 50%;
+        }
+
+    }
 
     .toolbar,
     .toolbar-background,
@@ -11,6 +27,8 @@ ng-component{
     .toolbar-title
     {
         color: #fff;
+        white-space: normal;
+        font-size: 15px;
     }
 
     ion-header
@@ -19,6 +37,7 @@ ng-component{
         ion-title
         {
             color: #fff;
+            white-space: normal;
         }
     }
 
@@ -30,6 +49,31 @@ ng-component{
         background: #1b282d;
         background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
 
+        
+        .logo-home
+        {
+            margin: 0 45% 0 45%;
+        }
+        .logo-session
+        {
+            margin: 6% 35% 0 35%;
+        }
+        .button
+        {
+            background: #1b282d;
+        }
+        .checkbox-icon.checkbox-checked
+        {
+            background-color: #1b282d;
+            border-color: #1b282d;
+        }
+        .select
+        {
+            .select-text
+            {
+                white-space: normal;
+            }
+        }
         
     }
 

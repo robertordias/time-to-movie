@@ -15,13 +15,13 @@
     <span *ngIf="!initialDate">Todos as sessões estão disponíveis para {{dayOfTheWeek}} </span>
   </div>
   <div *ngFor="let movie of movies">
-      <ion-card>
-        <img src="{{movie.images[0].url}}" />
+      <ion-card (click)="openHoursSession(movie.sessions)">
+        <img class="logo-session" src="{{movie.images[0].url}}" />
         <ion-card-header>
           <span>{{movie.title}}</span>
         </ion-card-header>
         <ion-card-content>
-          Descrição
+          {{movie.description}}
         </ion-card-content>
       </ion-card>
     </div>

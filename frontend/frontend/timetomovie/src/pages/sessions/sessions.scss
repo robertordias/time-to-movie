@@ -3,10 +3,21 @@ page-sessions {
     img
     {
         max-width: 90px;
+        margin: 5%;
         border: 0;
     }
-    ion-card-content
+    .card-header
     {
         color: #000;
+        span
+        {
+            font-weight: 800;
+        }
+    }
+    .card-content
+    {
+        color: #000;
+        max-height: 100px;
+        overflow-y: scroll;
     }
 }

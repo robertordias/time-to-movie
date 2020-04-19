@@ -7,6 +7,18 @@ page-home {
         background: #1b282d;
     }
 
+    
+    .scroll-content
+    {
+        .logo
+        {
+            img
+            {
+                margin: 0 45% 0 45%;
+            }
+        }
+    }
+
     .back-button,
     .toolbar-title
     {
@@ -29,6 +41,11 @@ page-home {
         
         background: #1b282d;
         background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
+
+        .button
+        {
+            background: #1b282d;
+        }
     }
     
 

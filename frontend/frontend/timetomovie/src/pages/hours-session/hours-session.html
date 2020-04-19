@@ -1,0 +1,14 @@
+<ion-content padding>
+  <div class="container">
+      <button class="close-button" (click)="close()"> X </button>
+      <div class="session-container">
+        <div *ngFor="let session of sessions" (click)="goToIngressoCom(session.url)">
+          <label>Legendado: <span>{{session.subtitled ? 'Sim' : 'Não'}}</span> </label> 
+          <label>Tipo: <span>{{session.type}}</span> </label> 
+          <label>Horário: <span>{{session.hour}}</span> </label> 
+          <label>Sala: <span>{{session.room}}</span> </label> 
+        </div>
+          <label style="font-size: 1.8rem;margin-bottom: 20px;">Sessões disponíveis: </label>
+      </div>
+  </div>
+</ion-content>
