@@ -2,10 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HoursSessionPage } from '../hours-session/hours-session';
+import { FeedBackService } from '../../services/feedback-service';
+import { IngressoComService } from '../../services/ingresso-com-service';
+import { utf8Encode } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'page-sessions',
   templateUrl: 'sessions.html',
+  providers: [FeedBackService, IngressoComService]
 })
 export class SessionsPage {
   user: any;
@@ -15,84 +19,15 @@ export class SessionsPage {
   initialDate: any = [];
   finalDate:any = [];
   isToday: boolean;
-  movies: any = 
-  [{
-    "title": "Viuva Negra",
-    "description": "Em Viúva Negra, após seu nascimento, Natasha Romanoff é dada à KGB, que a prepara para se tornar sua agente definitiva. Quando a URSS rompe, o governo tenta matá-la enquanto a ação se move para a atual Nova York, onde ela trabalha como freelancer. Após aventuras com os Vingadores, ela retorna para seu país de origem e se une à antigos aliados para acabar com o programa governamental que a transformou em uma assassina.",
-    "images": [{
-      "url": "https://s2.glbimg.com/oG1dNVr1CfN1rbHGGznr9bo_8_Q=/0x0:743x1100/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/d/3/kVHGCoQ8G1yrK5zUkpkg/viuva.jpg"
-    }],
-    "sessions": [{
-      "room": 1,
-      "hour": "13:00",
-      "subtitled": true,
-      "type":"normal",
-      "url": "https://www.ingresso.com/"
-    },
-    {
-      "room": 1,
-      "hour": "17:00",
-      "subtitled": true,
-      "type":"normal",
-      "url": "https://www.ingresso.com/",
-    },
-    {
-      "room": 2,
-      "hour": "15:00",
-      "subtitled": false,
-      "type":"3D",
-      "url": "https://www.ingresso.com/"
-    },
-    {
-      "room": 2,
-      "hour": "18:00",
-      "subtitled": false,
-      "type":"normal",
-      "url": "https://www.ingresso.com/"
-    }]
-  },
-  {
-    "title": "Um Lugar Silencioso 2",
-    "description" : "Um Lugar Silencioso - Parte 2, logo após os acontecimentos mortais, a família Abbott precisa agora encarar o terror mundo afora, continuando a lutar para sobreviver em silêncio. Obrigados a se aventurar pelo desconhecido, eles rapidamente percebem que as criaturas que caçam pelo som não são as únicas ameaças que os observam pelo caminho de areia.",
-    "images": [{
-      "url": "https://depasecg58tfl.cloudfront.net/wp-content/uploads/2020/02/Um-Lugar-Silencioso-2_cartaz-final-1-1-697x1024.jpg"
-    }],
-    "sessions": [{
-      "room": 1,
-      "hour": "14:00",
-      "subtitled": true,
-      "type":"normal",
-      "url": "https://www.ingresso.com/"
-    },
-    {
-      "room": 1,
-      "hour": "20:00",
-      "subtitled": true,
-      "type":"normal",
-      "url": "https://www.ingresso.com/"
-    },
-    {
-      "room": 2,
-      "hour": "15:30",
-      "subtitled": false,
-      "type":"3D",
-      "url": "https://www.ingresso.com/"
-    },
-    {
-      "room": 2,
-      "hour": "17:40",
-      "subtitled": false,
-      "type":"normal",
-      "url": "https://www.ingresso.com/"
-    }]
-  }];
+  currentDate: any = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+  movies: any;
   dayUser: any = [];
   movieTime: any = [];
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public navParams: NavParams, public storage: Storage) 
+  constructor(public navCtrl: NavController, private ingressoComService: IngressoComService, private feedback: FeedBackService, private modalCtrl: ModalController, public navParams: NavParams, public storage: Storage) 
   {
     this.theatherName = this.navParams.get('theatherName');
-    
+
     this.sessions = this.navParams.get('sessions');
     this.dayOfTheWeek = this.navParams.get('dayOfTheWeek');
     this.isToday = this.navParams.get('isToday');
@@ -163,7 +98,8 @@ export class SessionsPage {
   {
     const modal = this.modalCtrl.create(HoursSessionPage,{
       sessions: sessions,
-      dayUser : this.dayUser
+      dayUser : this.dayUser,
+      isToday : this.isToday
     });
 
     modal.present();
@@ -179,8 +115,20 @@ export class SessionsPage {
       }
     }
   }
+
   async ionViewDidLoad() {
     this.user = await this.storage.get('user'); 
+    this.feedback.alert('Atenção', 'Devido ao problema atual, esta tela não apresenta dados reais.');
+    this.movies = await this.ingressoComService.fakeMoviesByState(this.user.local.uf);
+    for(let movie of this.movies)
+    {
+      movie.sessions.map(session =>{
+        if(!session.date)
+        {
+          session.date = this.currentDate;
+        }
+      })
+    }
   }
 
 }

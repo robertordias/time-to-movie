@@ -62,6 +62,7 @@ page-hours-session {
             justify-content: center;
             align-items: center;
             padding: 4%;
+            overflow: hidden;
 
             .close-button
             {
@@ -77,13 +78,20 @@ page-hours-session {
             div 
             {
                 width: 80%;
-                display: flex;
-                flex-direction: column-reverse;
+                display: flex;    
+                flex-direction: column;
+                -webkit-box-direction: normal;
                 margin-bottom: 1em;
 
                 div
                 {
                     width: 100%;
+                }
+                div.bloco
+                {
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    overflow-y: scroll;
                 }
                 img
                 {
@@ -99,6 +107,15 @@ page-hours-session {
                     color: #414140;
                     font-size: 1.5rem;
                     margin-bottom: 0.3em;
+                    
+                    span.is-today
+                    {
+                        color: #fff;
+                        background-color: #4d97c1 ;
+                        font-size: 75%;
+                        padding: 1%;
+                        float: right;
+                    }
                 }
                 span
                 {

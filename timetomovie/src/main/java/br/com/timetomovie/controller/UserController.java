@@ -52,6 +52,7 @@ public class UserController
 	
 	
 
+	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
 	@RequestMapping( value = "/login", method = RequestMethod.POST )
 	@ResponseBody
 	public void login(
@@ -63,6 +64,7 @@ public class UserController
 		this.userService.login( username, password, response );
 	}
 
+	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
 	@RequestMapping( value = "/find-by-email/{email}", method = RequestMethod.GET )
 	@ResponseBody
 	public UserModel findByEmail(@PathVariable(value = "email") String email)

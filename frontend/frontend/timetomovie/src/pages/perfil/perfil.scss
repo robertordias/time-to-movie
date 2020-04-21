@@ -27,6 +27,8 @@ page-perfil {
         background-size: cover;
         background-position: right center;
         
+        overflow-x: hidden;
+        
         background: rgb(0,125,187);
         background: linear-gradient(130deg, #6200bb 0%, #1d0e9a 100%);
         h1

@@ -38,14 +38,27 @@ export class TheathersListPage {
     //   this.feedback.alert('Atenção', 'Não há sessões disponíveis para esse cinema');
     //   return;
     // }
-    
-    this.navCtrl.push(SessionsPage,{
-      sessions : sessions,
-      dayOfTheWeek: this.dayOfTheWeek,
-      theatherName : theatherName,
-      dayUser: this.dayUser,
-      isToday: this.isToday
+
+    let message = this.cinemas[0].blockMessage;
+    let alert = this.alertCtrl.create({
+      title: 'Atenção',
+      subTitle: message,
+      buttons: [{
+        text: 'Continuar',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.push(SessionsPage,{
+            sessions : sessions,
+            dayOfTheWeek: this.dayOfTheWeek,
+            theatherName : theatherName,
+            dayUser: this.dayUser,
+            isToday: this.isToday
+          });
+        }
+      }]
     });
+    alert.present();
+    
   }
 
   ionViewDidLoad() {

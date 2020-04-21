@@ -1,10 +1,12 @@
 package br.com.timetomovie.services;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -19,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import br.com.timetomovie.daos.HourDao;
+
 /**
  * <p>
  * </p>
@@ -30,6 +34,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class IngressoComService
 {
 
+    public static final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
+    public static final Charset UTF_8 = Charset.forName("UTF-8");
+    
 	public String getPartnership()
 	{
 		return "partnership/" + this.partnership;
@@ -90,10 +97,29 @@ public class IngressoComService
 		objectNode.put("data" , "" );
 		mapper.writeValue( out, objectNode);
 	}
+	
+	public void fakeMoviesByState(String state, final HttpServletResponse response) throws IOException
+	{
+		String jsonAsString = new String();
+		jsonAsString = this.hourDao.getFakeMoviesByState(state);
+		if(jsonAsString == null)
+		{
+			jsonAsString = this.hourDao.getFakeMovies();
+		}
+		String content = new String(jsonAsString.getBytes(ISO_8859_1), UTF_8);
+		final ServletOutputStream out = response.getOutputStream();
+		final ObjectMapper mapper = new ObjectMapper();
+		JsonNode json = mapper.readTree(content);
+		mapper.writeValue( out, json);
+		
+	}
 
 	@Value( "${ingresso.com.api}" )
 	private String ingressoComPath;
 
 	@Value( "${ingresso.com.partnership}" )
 	private String partnership;
+	
+	@Autowired
+	private HourDao hourDao;
 }

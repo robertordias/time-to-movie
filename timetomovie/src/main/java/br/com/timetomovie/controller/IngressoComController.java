@@ -46,6 +46,15 @@ public class IngressoComController {
 	}
 	
 	
+	@GetMapping(value = "/sessions-fake/{state}")
+	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
+	public void fakeMoviesByState(@PathVariable(value = "state") String state, final HttpServletResponse response) 
+			throws JsonParseException, JsonMappingException, IOException
+	{
+		this.ingressoComService.fakeMoviesByState(state, response);
+	}
+	
+	
 	
 	@Autowired
 	private IngressoComService ingressoComService;

@@ -138,6 +138,10 @@ export class PerfilPage {
       this.feedback.alert('Campo Obrigatório', 'Um horário final não foi preenchido');
       return null;
     }
+    if ([seg, ter, qua, qui, sex, sab, dom].indexOf('invalid') != -1) {
+      this.feedback.alert('Erro', 'Um dos campos está com formato de hora inválido.');
+      return null;
+    }
 
     let weeks: Week[] = [{ id: undefined, hour: [{ id: undefined, horario: seg }], day: 'SEG' },
     { id: undefined, hour: [{ id: undefined, horario: ter }], day: 'TER' },
@@ -163,6 +167,11 @@ export class PerfilPage {
     if (day.start && !day.end) {
       return 'noEnd';
     }
+
+    if(day.start && day.start.length != 5 || day.end && day.end.length != 5){
+      return 'invalid'
+    }
+
     if (!day.start && !day.end) {
       return '';
     }
