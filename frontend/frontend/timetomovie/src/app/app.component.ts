@@ -21,30 +21,7 @@ export class MyApp {
 
   pages: any = [ { title: 'Perfil', component: PerfilPage }, { title: 'Sair', component: LoginPage}];
 
-  user: User = new User();;
-  // user: any = 
-  // {
-  //   name: 'Teste',
-  //   email: 'usuario@teste.com.br',
-  //   local: 
-  //     {
-  //       estado: 'Rio de Janeiro',
-  //       uf: 'RJ'
-  //     },
-  //   week: 
-  //   {
-  //     domingo : [],
-  //     segunda : ['indisponivel'],
-  //     terça : ['07:00|18:00'],
-  //     quarta : ['indisponivel'],
-  //     quinta : ['indisponivel'],
-  //     sexta : ['07:00|18:00'],
-  //     sábado : ['13:00|18:00'],
-  //   },
-  //   hasInterval: false,
-  //   interval: null
-    
-  // }
+  user: User = new User();
 
   constructor(platform: Platform, private menu: MenuController, private events: Events, statusBar: StatusBar, private feedback: FeedBackService, splashScreen: SplashScreen, public storage: Storage, private userService: UserService) {
     this.initializeApp();
