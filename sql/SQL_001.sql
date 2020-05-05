@@ -1,5 +1,4 @@
-create database timetomovie_dev;
-use timetomovie_dev;
+use timetomovie;
 
 create table local(
 	id_local int not null auto_increment primary key,

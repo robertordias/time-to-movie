@@ -1,4 +1,4 @@
-use timetomovie_dev;
+use timetomovie;
 
 create table session_content (
 	id_session_content int not null auto_increment primary key,
