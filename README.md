@@ -1,5 +1,5 @@
 # Time to Movie
-Aplicativo que mostrará as sessões disponíveis no cinema através do seu tempo de disponibilidade
+Aplicativo com integração da API Ingresso.com que mostrará as sessões disponíveis no cinema através do seu tempo de disponibilidade. Para fazer acesso a api foi disponibilizado um código de parceiro pelos mesmos.
 
 Ferramentas necessárias para buildar o projeto:
 
