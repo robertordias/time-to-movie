@@ -54,7 +54,7 @@ export class HomePage {
   {
     try
     {
-      this.feedback.loading();
+      this.feedback.presentLoading();
       if(this.isToday)
       {
         let date = new Date().getDay();
