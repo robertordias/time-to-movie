@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 import { FeedBackService } from '../../services/feedback-service';
 import moment from 'moment'
 
@@ -33,7 +34,7 @@ export class HoursSessionPage {
 
   goToIngressoCom(url)
   {
-    window.open(url, '_blank', '_system');
+    InAppBrowser.create(url, '_blank').show();
   }
 
   sort(dateA, dateB)
