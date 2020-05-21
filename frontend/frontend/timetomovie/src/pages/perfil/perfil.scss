@@ -130,10 +130,11 @@ page-perfil {
                 }
                 ion-checkbox
                 {
-                    width: 7%;
+                    width: 8%;
                     .checkbox-icon
                     {
                         top: 18px;
+                        display: block;
                     }
                 }
             }

@@ -13,7 +13,7 @@
   <div *ngFor="let cine of cinemas">
     <ion-item  (click)="getSessions(cine.id, cine.name)">
       <div >
-        <img alt="imagem-cinema" src="{{cine.images[0].url}}" onerror="this.src='/assets/imgs/image-error.png'" >
+        <img alt="imagem-cinema" src="{{cine.images[0].url}}"  onError="this.src='/assets/imgs/image-error.PNG';" >
         <div class="information">
           <span>{{cine.name}}</span>
         </div>

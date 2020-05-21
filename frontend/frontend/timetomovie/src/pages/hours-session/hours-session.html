@@ -3,13 +3,15 @@
       <button class="close-button" (click)="close()"> X </button>
       <div class="session-container">
         <label style="font-size: 1.8rem;margin-bottom: 20px;">Sessões disponíveis: </label>
-        <div class="bloco" *ngFor="let session of sessions" (click)="goToIngressoCom(session.url)">
-          <label>Sala: <span>{{session.room}}</span> <span *ngIf="movieIsToday(session.date)" class="is-today">HOJE</span> </label> 
-          <label>Data: <span>{{formatDate(session.date)}}</span> </label> 
-          <label>Horário: <span>{{session.hour}}</span> </label> 
-          <label>Tipo: <span>{{session.type}}</span> </label> 
-          <label>Legendado: <span>{{session.subtitled ? 'Sim' : 'Não'}}</span> </label> 
-        </div>
+        <a [href]="session.url" target="_blank" *ngFor="let session of sessions">
+          <div class="bloco" >
+            <label>Sala: <span>{{session.room}}</span> <span *ngIf="movieIsToday(session.date)" class="is-today">HOJE</span> </label> 
+            <label>Data: <span>{{formatDate(session.date)}}</span> </label> 
+            <label>Horário: <span>{{session.hour}}</span> </label> 
+            <label>Tipo: <span>{{session.type}}</span> </label> 
+            <label>Legendado: <span>{{session.subtitled ? 'Sim' : 'Não'}}</span> </label> 
+          </div>
+        </a>
       </div>
   </div>
 </ion-content>
