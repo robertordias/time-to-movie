@@ -1,5 +1,17 @@
 page-sessions {
 
+    div.text-info
+    {
+        text-align: -webkit-center;
+        margin: 15px;
+        span
+        {
+            font-size: 18px;
+            font-weight: 500;
+            display: block;
+        }
+    }
+
     img
     {
         max-width: 90px;

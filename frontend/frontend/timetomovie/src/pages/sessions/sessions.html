@@ -10,9 +10,10 @@
   </ion-header>
 
 <ion-content padding>
-  <div>
-    <span *ngIf="initialDate">Sessões disponíveis para {{dayOfTheWeek}} antes de {{initialDate}} e após {{finalDate}}</span>
-    <span *ngIf="!initialDate">Todos as sessões estão disponíveis para {{dayOfTheWeek}} </span>
+  <div class="text-info">
+    <span *ngIf="initialDate">Sessões disponíveis para {{dayOfTheWeek}} antes de {{initialDate}} e após {{finalDate}} </span>
+    <span *ngIf="!initialDate">Todos as sessões estão disponíveis para {{dayOfTheWeek}}</span>
+    <span>Clique para visualizar os horários</span>
   </div>
   <div *ngFor="let movie of movies">
       <ion-card (click)="openHoursSession(movie.sessions)">

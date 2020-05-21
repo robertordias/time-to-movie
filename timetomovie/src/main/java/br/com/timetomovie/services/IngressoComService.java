@@ -106,10 +106,9 @@ public class IngressoComService
 		{
 			jsonAsString = this.hourDao.getFakeMovies();
 		}
-		String content = new String(jsonAsString.getBytes(ISO_8859_1), UTF_8);
 		final ServletOutputStream out = response.getOutputStream();
 		final ObjectMapper mapper = new ObjectMapper();
-		JsonNode json = mapper.readTree(content);
+		JsonNode json = mapper.readTree(jsonAsString);
 		mapper.writeValue( out, json);
 		
 	}

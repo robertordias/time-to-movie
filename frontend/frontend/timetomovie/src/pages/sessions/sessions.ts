@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { HoursSessionPage } from '../hours-session/hours-session';
 import { FeedBackService } from '../../services/feedback-service';
 import { IngressoComService } from '../../services/ingresso-com-service';
-import { utf8Encode } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'page-sessions',

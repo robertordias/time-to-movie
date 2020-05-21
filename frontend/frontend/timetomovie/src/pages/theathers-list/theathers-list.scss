@@ -1,6 +1,16 @@
 page-theathers-list {
 
     ion-content{
+        div.text-info
+        {
+            text-align: -webkit-center;
+            margin: 15px;
+            span
+            {
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
         ion-item{
             div
             {

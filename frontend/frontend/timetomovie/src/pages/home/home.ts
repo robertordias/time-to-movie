@@ -4,11 +4,12 @@ import { Storage } from '@ionic/storage';
 import { NavController, AlertController } from 'ionic-angular';
 import { TheathersListPage } from '../theathers-list/theathers-list';
 import { User } from '../../app/models/User';
+import { FeedBackService } from '../../services/feedback-service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.html',
-  providers: [IngressoComService]
+  providers: [IngressoComService, FeedBackService]
 })
 export class HomePage {
   state: any;
@@ -26,7 +27,7 @@ export class HomePage {
    {name:'Sexta', code: 'sexta-feira'},
    {name:'Sábado', code:'sábado'}];
 
-  constructor(public ingressoService: IngressoComService, public storage: Storage, public navCtrl: NavController, public alertCtrl: AlertController) 
+  constructor(public ingressoService: IngressoComService, private feedback: FeedBackService, public storage: Storage, public navCtrl: NavController, public alertCtrl: AlertController) 
   {
 
   }
@@ -51,41 +52,51 @@ export class HomePage {
 
   async nextPage()
   {
-    if(this.isToday)
+    try
     {
-      let date = new Date().getDay();
-      this.dayOfTheWeek(date);
-    }
-
-    let day = this.day.split('-')[0];
-    let dayUser = this.user[day].hour[0].horario;
-    if(dayUser == "indisponivel")
-    {
-      let alert = this.alertCtrl.create({
-        title: 'Você não está disponível neste dia!',
-        subTitle: 'Escolha outro dia ou altere sua disponibilidade para este dia.',
-        buttons: [{
-          text: 'OK',
-          role: 'ok',
-          handler: () => {
-          }
-        }]
-      });
-      alert.present();
-      return;
-    }
-
-    let film = await this.ingressoService.getTheatersfromCity(this.city);
-    this.storage.set('city', this.city);
-    this.navCtrl.push(TheathersListPage,
+      this.feedback.loading();
+      if(this.isToday)
       {
-        user: this.user,
-        cityId : this.city,
-        cinemas: film,
-        dayOfTheWeek: this.day,
-        dayUser: this.user[day].hour,
-        isToday: this.isToday
-      });
+        let date = new Date().getDay();
+        this.dayOfTheWeek(date);
+      }
+  
+      let day = this.day.split('-')[0];
+      let dayUser = this.user[day].hour[0].horario;
+      if(dayUser == "indisponivel")
+      {
+        let alert = this.alertCtrl.create({
+          title: 'Você não está disponível neste dia!',
+          subTitle: 'Escolha outro dia ou altere sua disponibilidade para este dia.',
+          buttons: [{
+            text: 'OK',
+            role: 'ok',
+            handler: () => {
+            }
+          }]
+        });
+        alert.present();
+        this.feedback.dismissLoading();
+        return;
+      }
+  
+      let film = await this.ingressoService.getTheatersfromCity(this.city);
+      this.storage.set('city', this.city);
+      this.navCtrl.push(TheathersListPage,
+        {
+          user: this.user,
+          cityId : this.city,
+          cinemas: film,
+          dayOfTheWeek: this.day,
+          dayUser: this.user[day].hour,
+          isToday: this.isToday
+        });
+    }
+    catch(e)
+    {
+      this.feedback.dismissLoading();
+      this.feedback.alert('Erro', 'Verifique sua conexão');
+    }
   }
 
 

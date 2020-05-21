@@ -10,6 +10,9 @@
 </ion-header>
 
 <ion-content padding>
+  <div class="text-info">
+    <span>Selecione um cinema para prosseguir</span>
+  </div>
   <div *ngFor="let cine of cinemas">
     <ion-item  (click)="getSessions(cine.id, cine.name)">
       <div >

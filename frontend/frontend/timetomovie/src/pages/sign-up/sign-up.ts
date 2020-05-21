@@ -170,6 +170,12 @@ export class SignUpPage {
       return;
     }
 
+    if (this.password.length < 8) {
+      this.feedback.dismissLoading();
+      this.feedback.alert('Erro', 'Sua senha possui menos que 8 caracteres');
+      return;
+    }
+
     this.user.password = this.password;
 
     if (!this.state) {
