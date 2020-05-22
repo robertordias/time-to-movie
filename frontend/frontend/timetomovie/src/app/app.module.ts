@@ -18,6 +18,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { HTTP } from '@ionic-native/http';
 import { FeedBackService } from '../services/feedback-service';
 import { HoursSessionPage } from '../pages/hours-session/hours-session';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HoursSessionPage } from '../pages/hours-session/hours-session';
     LoginPage,
     SignUpPage,
     PerfilPage,
-    HoursSessionPage
+    HoursSessionPage,
+    ForgotPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { HoursSessionPage } from '../pages/hours-session/hours-session';
     LoginPage,
     SignUpPage,
     PerfilPage,
-    HoursSessionPage
+    HoursSessionPage,
+    ForgotPasswordPage
   ],
   providers: [
     StatusBar,

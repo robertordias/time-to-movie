@@ -63,6 +63,17 @@ public class UserController
 	{
 		this.userService.login( username, password, response );
 	}
+	
+	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
+	@RequestMapping( value = "/forgot-password", method = RequestMethod.POST )
+	@ResponseBody
+	public void forgotPassword(
+		@RequestParam( value = "email" ) final String email,
+		final HttpServletResponse response )
+		throws IOException
+	{
+		this.userService.sendEmail(email, response);
+	}
 
 	@CrossOrigin( origins = {"*"}, maxAge = 6000 )
 	@RequestMapping( value = "/find-by-email/{email}", method = RequestMethod.GET )

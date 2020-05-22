@@ -36,4 +36,12 @@ export class UserService {
     {
         return await this.httpClient.get<User>(Constants.api + 'user/find-by-email/' + username).toPromise();
     }
+
+    async forgotPassword(email):Promise<any>
+    {
+        let form = new FormData();
+
+        form.append('email', email);
+        return await this.httpClient.post(Constants.api + 'user/forgot-password',  form, {headers: this.header}).toPromise();
+    }
 }

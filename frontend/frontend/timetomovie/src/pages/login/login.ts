@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Events } from 'ionic-angular';
 import { FeedBackService } from '../../services/feedback-service';
 import { UserService } from '../../services/user-service';
 import { HomePage } from '../home/home';
 import { SignUpPage } from '../sign-up/sign-up';
 import { User } from '../../app/models/User';
 import { Storage } from '@ionic/storage';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 @Component({
   selector: 'page-login',
@@ -17,13 +18,18 @@ export class LoginPage {
   username: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private feedback: FeedBackService, private userService: UserService, private app: App) {
+  constructor(public navCtrl: NavController, private events: Events, public navParams: NavParams, private storage: Storage, private feedback: FeedBackService, private userService: UserService, private app: App) {
   }
 
   signUp()
   {
     this.feedback.presentLoading();
     this.navCtrl.push(SignUpPage);
+  }
+
+  forgotPassword()
+  {
+    this.navCtrl.push(ForgotPasswordPage);
   }
 
   async login()
@@ -48,6 +54,7 @@ export class LoginPage {
         {
           let user = await this.userService.findByEmail(this.username);
           this.storage.set('user', new User(user));
+          this.events.publish('user', user);
           console.log(new User(user))
           var nav = this.app.getRootNav();
           nav.setRoot(HomePage);
