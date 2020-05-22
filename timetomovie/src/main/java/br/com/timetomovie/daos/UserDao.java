@@ -19,7 +19,7 @@ public interface UserDao
 	extends JpaRepository<UserModel, Long>
 {
 
-	@Query( value = "from UserModel u where u.email = :email" )
+	@Query( value = "select * from usuario u where u.email = :email LIMIT 1", nativeQuery= true )
 	UserModel findByUsername( @Param( value = "email" ) String email );
 
 }
